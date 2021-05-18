@@ -10,7 +10,7 @@ import (
 	"sync"
 
 	"github.com/grailbio/go-dicom"
-	"github.com/mattn/go-colorable"
+	//"github.com/mattn/go-colorable"
 	"github.com/nsmfoo/dicompot"
 	"github.com/nsmfoo/dicompot/dimse"
 	"github.com/sirupsen/logrus"
@@ -43,12 +43,14 @@ func logInit() {
 		logrus.Fatalf("Failed to initialize file rotate hook: %v", err)
 	}
 
-	logrus.SetOutput(colorable.NewColorableStdout())
-	logrus.SetFormatter(&logrus.TextFormatter{
-		ForceColors:     true,
-		FullTimestamp:   true,
-		TimestampFormat: "2006-01-02 15:04:05",
-	})
+	//logrus.SetOutput(colorable.NewColorableStdout())
+	//logrus.SetFormatter(&logrus.TextFormatter{
+	//	ForceColors:     true,
+	//	FullTimestamp:   true,
+	//	TimestampFormat: "2006-01-02 15:04:05",
+	//})
+	logrus.SetOutput(os.Stdout)
+	logrus.SetFormatter(&logrus.JSONFormatter{})
 	logrus.AddHook(rotateFileHook)
 }
 
